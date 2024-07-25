@@ -1,9 +1,10 @@
 ﻿@using CW_W12_114.Utiliti
 @{
     var data = ViewBag.data;
+    var students = ViewBag.Students;
     ViewData["Title"] = "Home Page";
 }
-@if(ViewData["success"]!= null)
+@if (ViewData["success"] != null)
 {
     <h1 class="text-success">
         @ViewData["success"]
@@ -29,10 +30,26 @@
                         <th scope="row">@item.Id</th>
                         <td>@item.FirstName</td>
                         <td>@item.LastName</td>
+                        <td>
+                            <a class="btn btn-primary" asp-action="Detail" asp-route-id="@item.Id">مشاهده جزعیات </a>
+                            <a class="btn btn-primary" asp-action="GetFullName" asp-route-count="@item.Id">مشاهده از اینجا به قبل </a>
+                        </td>
+
                     </tr>
                 }
             </tbody>
         </table>
     }
+}
+@if (students != null && students is List<IStudent>)
+{
+    <div class="container text-center gap-3">
+        <div class="row">
+            @foreach (var item in students as List<IStudent>)
+            {
+                <div class="col-2 bg-danger m-2 rounded-2 text-light">@item.GetFullName()</div>
+            }
+        </div>
+    </div>
 }
 

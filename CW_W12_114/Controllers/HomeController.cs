@@ -18,7 +18,7 @@ namespace CW_W12_114.Controllers
         {
             var res = new MyQueue<Student>();
             ViewBag.data = res.SetDefaultStudents();
-            
+
             return View();
         }
         public IActionResult FilterStudent(int id)
@@ -28,6 +28,24 @@ namespace CW_W12_114.Controllers
             ViewData["success"] = "موفق";
             return View("Index");
         }
+
+        public IActionResult GetFullName(int count = 10)
+        {
+            var queue = new MyQueue<Student>();
+            List<IStudent> res = queue.SetDefaultStudents().Take(count).Select(x => x as IStudent).ToList();
+            ViewBag.Students = res;
+            ViewData["success"] = "موفق";
+            return View("Index");
+        }
+
+        public IActionResult Detail(int id) { 
+            var queue = new MyQueue<Student>();
+            queue.SetDefaultStudents();
+            var res = queue.GetById(id);
+            ViewBag.data = res;
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

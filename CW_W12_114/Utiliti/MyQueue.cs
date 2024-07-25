@@ -37,6 +37,7 @@
             return list.Where(x => x.FirstName == firstName).Select(x => x.GetFullName()).ToList();
             
         }
+        public T GetById(int id) => list.First(x => x.Id == id);
 
         public bool x(T item, string firstName)
         {
